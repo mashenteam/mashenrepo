@@ -36,4 +36,6 @@ public interface RoleService {
 	 * @return
 	 */
 	public PageVO<RoleVO> list(PageVO<RoleVO> pagevo,Map<String,Object> request) throws Throwable;
+	
+	public List<RoleVO> listRole() throws Throwable;
 }
