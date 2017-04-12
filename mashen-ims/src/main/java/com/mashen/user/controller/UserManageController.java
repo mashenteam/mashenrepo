@@ -1,6 +1,8 @@
 package com.mashen.user.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mashen.common.domain.JsonResult;
 import com.mashen.datatables.domain.DataTablesRequest;
 import com.mashen.datatables.domain.DataTablesResponse;
+import com.mashen.organization.domain.OrganizationVO;
+import com.mashen.organization.service.OrganizationService;
 import com.mashen.privilege.aop.annotation.FunctionPrivilege;
 import com.mashen.user.domain.UserVO;
 import com.mashen.user.service.UserService;
@@ -23,7 +27,8 @@ import com.mashen.user.service.UserService;
 public class UserManageController {
 	@Autowired
 	private UserService service;
-	
+	@Autowired
+	private OrganizationService orService;
 	/**
 	 * 跳转到列表页面
 	 * @return
@@ -88,5 +93,9 @@ public class UserManageController {
 		rs.setMsg("删除成功！");
 		return rs;
 	}
-
+	@RequestMapping("/getDept")
+	public @ResponseBody List<OrganizationVO> getDeptJson(String pid){
+		return orService.getByPId(pid);
+	}
+	
 }

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
 <meta charset="utf-8" />
 <title>新增用户</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,6 +31,18 @@
 					<label for="name">密码</label> <input type="password" required="required"
 						class="form-control" name="password" value="${user.password }" placeholder="请输入密码">
 				</div>
+				<div class="form-group" >
+					<label for="dept" >所属部门</label>
+					<select name="roleId" id="dept">
+						<option>--请选择--</option>
+					</select> 
+				</div>
+				<div class="form-group">
+					<label for="role">岗位</label>
+					<select name="roleId">
+					
+					</select>
+				</div>
 				<div class="text-center">
 				<button type="submit" class="btn btn-primary">保存</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;
@@ -42,4 +54,15 @@
 	</div>
 	<%@ include file="/WEB-INF/pages/common/rs_js.jsp"%>
 </body>
+<script type="text/javascript">
+		$.post("${path}/user/getDept.action?pid=0",function(data){
+			$.each(data,function(index,item){
+				var option = $("<option></option>");
+				option.attr("value",item.departmentId).text(item.name);
+				$("#dept").append(option);
+			});
+		},"json");
+	
+	
+</script>
 </html>
