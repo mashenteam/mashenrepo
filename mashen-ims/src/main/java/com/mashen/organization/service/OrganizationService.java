@@ -16,7 +16,9 @@ public interface OrganizationService {
 	
 	public void update(OrganizationVO organization) throws Throwable;
 	
-	public List<OrganizationVO> list(String id) throws Throwable;  
+	public OrganizationVO getOrganizationById(String id) throws Throwable;  
+	
+	public OrganizationVO getOrganizationByName(String name) throws Throwable;  
 	
 	/**
 	 * 使用datatables的分页查询

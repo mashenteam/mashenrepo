@@ -1,6 +1,5 @@
 package com.mashen.organization.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,27 +28,38 @@ public class OrganizationServiceImp implements OrganizationService {
 	}
 	@Override
 	public void update(OrganizationVO organization) throws Throwable {
-		mapper.updateByPrimaryKeySelective(organization);
-		
+		mapper.updateByPrimaryKeySelective(organization);		
 	}
+		
 	@Override
-	public List<OrganizationVO> list(String id) throws Throwable {
+	public OrganizationVO getOrganizationById(String id) throws Throwable {
 		OrganizationVOExample example = new OrganizationVOExample();
 		example.createCriteria().andPidEqualTo(id+"%");
-		List<OrganizationVO> list = mapper.selectByExample(example);		
-		return list;
+		List<OrganizationVO> list = mapper.selectByExample(example);
+		if(list != null && list.size() > 0){
+			return list.get(0);
+		}
+		return null;
 	}
 	@Override
+	public OrganizationVO getOrganizationByName(String name) throws Throwable {
+		OrganizationVOExample example = new OrganizationVOExample();
+		example.createCriteria().andNameEqualTo(name);
+		List<OrganizationVO> list = mapper.selectByExample(example);
+		if(list != null && list.size() > 0){
+			return list.get(0);
+		}
+		return null;
+	}
+	
+	@Override
 	public DataTablesResponse<UserVO> list(DataTablesRequest request) throws Throwable {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
 	public PageVO<UserVO> list(PageVO<UserVO> pagevo, Map<String, Object> request) throws Throwable {
-		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }
 	
 

@@ -12,8 +12,8 @@ public class OrganizationManageController {
 	@Autowired
 	private OrganizationService service;
 	
-	//edrtyujk
-	   
+	
+	
 	
 	
 
