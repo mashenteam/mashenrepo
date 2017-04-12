@@ -268,7 +268,7 @@
 				</div>
 				<!-- #sidebar-shortcuts -->
 				<ul class="nav nav-list">
-				   <c:forEach var="firstMenu" items="${functionPrivilegesTree }">
+				   <c:forEach var="firstMenu" items="${s_functionPrivilegesTree }">
 					<li><a href="#" class="dropdown-toggle"> <i
 							class="${firstMenu.icon }"></i> <span class="menu-text">${firstMenu.name }</span>
 
