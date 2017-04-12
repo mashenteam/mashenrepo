@@ -39,7 +39,7 @@
 				</div>
 				<div class="form-group">
 					<label for="role">岗位</label>
-					<select name="roleId">
+					<select name="roleId" id="role">
 					
 					</select>
 				</div>
@@ -62,7 +62,14 @@
 				$("#dept").append(option);
 			});
 		},"json");
-	
+		
+		$.post("${path}/user/getRole.action",function(data){
+			$.each(data,function(index,item){
+				var option = $("<option></option>");
+				option.attr("value",item.departmentId).text(item.name);
+				$("#role").append(option);
+			});
+		},"json");
 	
 </script>
 </html>
