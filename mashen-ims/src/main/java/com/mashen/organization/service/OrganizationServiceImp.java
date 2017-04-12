@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mashen.common.domain.PageVO;
+import com.mashen.common.util.SearchConditionUtils;
 import com.mashen.datatables.domain.DataTablesRequest;
 import com.mashen.datatables.domain.DataTablesResponse;
 import com.mashen.organization.dao.OrganizationVOMapper;
 import com.mashen.organization.domain.OrganizationVO;
 import com.mashen.organization.domain.OrganizationVOExample;
-import com.mashen.user.domain.UserVO;
+import com.mashen.privilege.aop.annotation.DataPrivilege;
+import com.mashen.privilege.aop.annotation.SearchCondition;
+import com.mashen.privilege.aop.annotation.SearchConditionType;
 
 @Service
 public class OrganizationServiceImp implements OrganizationService {
@@ -51,15 +54,45 @@ public class OrganizationServiceImp implements OrganizationService {
 		}
 		return null;
 	}
+	@Override
+	@DataPrivilege("organization")
+	public DataTablesResponse<OrganizationVO> list(
+				@SearchCondition(SearchConditionType.DATATABLES) DataTablesRequest request)
+				throws Throwable {
+			OrganizationVOExample example = new OrganizationVOExample();
+			DataTablesResponse<OrganizationVO> response = new DataTablesResponse<OrganizationVO>();
+			SearchConditionUtils.wrapperAndCondition(example, request);// 封装查询条件
+
+			response.setDraw(request.getDraw());
+			response.setRecordsTotal(mapper.countByExample(example));
+			response.setData(mapper.selectByExample(example));
+			return response;
+	}
+	@Override
+	@DataPrivilege("organization")
+	public PageVO<OrganizationVO> list(
+			PageVO<OrganizationVO> pagevo,
+			@SearchCondition(SearchConditionType.MAP) Map<String, Object> conditionMap)
+			throws Throwable {
+		OrganizationVOExample example = new OrganizationVOExample();
+		SearchConditionUtils.wrapperAndCondition(example, pagevo, conditionMap);// 封装查询条件
+		pagevo.setTotalRecord(mapper.countByExample(example));
+		pagevo.setRecords(mapper.selectByExample(example));
+		return pagevo;
+	}
 	
 	@Override
-	public DataTablesResponse<UserVO> list(DataTablesRequest request) throws Throwable {
-		return null;
+	public OrganizationVO get(String id) {
+		return this.mapper.selectByPrimaryKey(id);
 	}
 	@Override
-	public PageVO<UserVO> list(PageVO<UserVO> pagevo, Map<String, Object> request) throws Throwable {
-		return null;
+	public List<OrganizationVO> getByPId(String pid) {
+		OrganizationVOExample example = new OrganizationVOExample();
+		example.createCriteria().andPidEqualTo(pid);
+		return mapper.selectByExample(example);
+				
 	}
+	
 }
 	
 
