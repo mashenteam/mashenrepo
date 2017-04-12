@@ -27,7 +27,7 @@ public class LoginStateHandlerInterceptor implements HandlerInterceptor {
 		logger.debug("LoginStateHandlerInterceptor preHandle");
 		HttpServletRequest httpReq=(HttpServletRequest)request;
 		HttpServletResponse httpRes=(HttpServletResponse)response;
-		if(httpReq.getSession().getAttribute("user")!=null){//已经登录
+		if(httpReq.getSession().getAttribute("s_user")!=null){//已经登录
 			logger.debug("已经登录");
 			return true;
 		}else{//没有登录
