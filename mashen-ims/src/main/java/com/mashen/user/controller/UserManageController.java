@@ -19,6 +19,8 @@ import com.mashen.datatables.domain.DataTablesResponse;
 import com.mashen.organization.domain.OrganizationVO;
 import com.mashen.organization.service.OrganizationService;
 import com.mashen.privilege.aop.annotation.FunctionPrivilege;
+import com.mashen.role.domain.RoleVO;
+import com.mashen.role.service.RoleServiceImp;
 import com.mashen.user.domain.UserVO;
 import com.mashen.user.service.UserService;
 
@@ -29,6 +31,8 @@ public class UserManageController {
 	private UserService service;
 	@Autowired
 	private OrganizationService orService;
+	@Autowired
+	private RoleServiceImp roleService;
 	/**
 	 * 跳转到列表页面
 	 * @return
@@ -96,6 +100,11 @@ public class UserManageController {
 	@RequestMapping("/getDept")
 	public @ResponseBody List<OrganizationVO> getDeptJson(String pid){
 		return orService.getByPId(pid);
+	}
+	
+	@RequestMapping("/getRole")
+	public @ResponseBody List<RoleVO> getRoleJson() throws Throwable{
+		return roleService.listRole();
 	}
 	
 }

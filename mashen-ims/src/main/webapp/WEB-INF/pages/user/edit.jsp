@@ -33,14 +33,14 @@
 				</div>
 				<div class="form-group" >
 					<label for="dept" >所属部门</label>
-					<select name="roleId" id="dept">
+					<select name="roleId" id="dept"  class="form-control">
 						<option>--请选择--</option>
 					</select> 
 				</div>
 				<div class="form-group">
 					<label for="role">岗位</label>
-					<select name="roleId" id="role">
-					
+					<select name="roleId" id="role" class="form-control">
+						<option>--请选择--</option>
 					</select>
 				</div>
 				<div class="text-center">
