@@ -21,8 +21,5 @@ public class DataRules {
 	 */
 	public static final String DEPARTMENT_AND_SUB="CreatorDepartmentIdLike";
 	
-	/**
-	 * 自定义规则，使用扩展字段
-	 */
-	public static final String CUSTOM_RULE="ExtendConditionEqualTo";
+	
 }

@@ -114,19 +114,18 @@ public class DataPrivilegeAspect {
 			logger.debug("只能看本部门及下级创建的数据");
 			return;
 		} else {// 自定义规则，用于查看跨部门数据
+			//{"type":"currid","value":"111"}
 			CustomRule customRule = JSONObject.parseObject(privilege,
 					CustomRule.class);
 			if (CustomRuleType.CurrentUserID.equals(customRule.getType())) {
 				String userid = currentUser.getUserId();
 				if (userid != null && userid.equals(customRule.getValue())) {
-					conditionMap.put(DataRules.CUSTOM_RULE, 0);
 					return;
 				}
 			} else if (CustomRuleType.CurrentRoleID
 					.equals(customRule.getType())) {
 				List<String> roles = currentUser.getRoles();
 				if (roles.contains(customRule.getValue())) {
-					conditionMap.put(DataRules.CUSTOM_RULE, 0);
 					return;
 				}
 			} else if (CustomRuleType.CurrentDepartMentID.equals(customRule
