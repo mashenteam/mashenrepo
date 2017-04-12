@@ -10,7 +10,6 @@ import com.mashen.common.domain.PageVO;
 import com.mashen.common.util.SearchConditionUtils;
 import com.mashen.datatables.domain.DataTablesRequest;
 import com.mashen.datatables.domain.DataTablesResponse;
-import com.mashen.privilege.aop.annotation.DataPrivilege;
 import com.mashen.privilege.aop.annotation.SearchCondition;
 import com.mashen.privilege.aop.annotation.SearchConditionType;
 import com.mashen.role.dao.RoleVOMapper;
@@ -92,6 +91,14 @@ public class RoleServiceImp implements RoleService {
 			example.createCriteria().andNameLike(object + "%");
 		}
 		return mapper.selectByExample(example);
+	}
+
+	@Override
+	public List<RoleVO> listRole() throws Throwable {
+		RoleVOExample example = new RoleVOExample();
+		example.createCriteria().andNameLike(""+"%");
+		List<RoleVO> list = mapper.selectByExample(example);
+		return list;
 	}
 
 }
