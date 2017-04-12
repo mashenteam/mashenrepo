@@ -32,6 +32,10 @@ public class RoleServiceImp implements RoleService{
 	@Override
 	public void deleteByExa(Map<String,Object> request) throws Throwable {
 		RoleVOExample example=new RoleVOExample();
+		Object object = request.get("name");
+		if(object!=null){
+			example.createCriteria().andNameLike(object+"%");
+		}
 	}
 
 	@Override
