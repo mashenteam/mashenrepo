@@ -17,7 +17,7 @@ public interface RoleService {
 	
 	public void updateRole(RoleVO role) throws Throwable;
 	
-	public void updateByExa(Map<String,Object> request) throws Throwable;
+	public void updateByExa(RoleVO role,Map<String,Object> request) throws Throwable;
 	
 	public RoleVO getRoleById(String role_id) throws Throwable;
 	
