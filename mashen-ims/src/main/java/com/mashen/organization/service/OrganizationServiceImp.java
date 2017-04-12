@@ -6,7 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mashen.common.dao.CommonMapper;
 import com.mashen.common.domain.PageVO;
+import com.mashen.common.domain.Sequence;
 import com.mashen.common.util.SearchConditionUtils;
 import com.mashen.datatables.domain.DataTablesRequest;
 import com.mashen.datatables.domain.DataTablesResponse;
@@ -20,9 +22,15 @@ import com.mashen.privilege.aop.annotation.SearchConditionType;
 @Service
 public class OrganizationServiceImp implements OrganizationService {
 	@Autowired
-	private OrganizationVOMapper mapper; 
+	private OrganizationVOMapper mapper;
+	@Autowired
+	private CommonMapper commonMapper;
 	@Override
 	public Integer add(OrganizationVO organization) throws Throwable {
+		Sequence seq=new Sequence();
+		commonMapper.getSequence(seq);
+		organization.setDepartmentId(organization.getPid()+seq);
+		System.out.println("add:"+organization);
 		return mapper.insert(organization);
 	}
 	@Override
@@ -55,9 +63,8 @@ public class OrganizationServiceImp implements OrganizationService {
 		return null;
 	}
 	@Override
-	@DataPrivilege("organization")
 	public DataTablesResponse<OrganizationVO> list(
-				@SearchCondition(SearchConditionType.DATATABLES) DataTablesRequest request)
+				DataTablesRequest request)
 				throws Throwable {
 			OrganizationVOExample example = new OrganizationVOExample();
 			DataTablesResponse<OrganizationVO> response = new DataTablesResponse<OrganizationVO>();
@@ -88,7 +95,7 @@ public class OrganizationServiceImp implements OrganizationService {
 	@Override
 	public List<OrganizationVO> getByPId(String pid) {
 		OrganizationVOExample example = new OrganizationVOExample();
-		example.createCriteria().andPidEqualTo(pid);
+		example.createCriteria().andPidLike(pid+"%");
 		return mapper.selectByExample(example);
 				
 	}

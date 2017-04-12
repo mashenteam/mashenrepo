@@ -15,6 +15,8 @@ public interface OrganizationService {
 	
 	public List<OrganizationVO> getByPId(String pid);
 	
+
+	
 	public void delete(String id) throws Throwable;
 	
 	public void update(OrganizationVO organization) throws Throwable;
