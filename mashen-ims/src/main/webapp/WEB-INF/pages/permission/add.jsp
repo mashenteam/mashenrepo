@@ -13,12 +13,16 @@
 
     <![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<script src="https://code.jquery.com/jquery.js"></script>
 <link href="${path}/resources/assets/css/bootstrap.min.css"
 	rel="stylesheet" />
-<script src="${path}/resources/assets/js/jquery-2.0.3.min.js"></script>
-<script src="${path}/resources/assets/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery.js"></script>
+<link href="${path}/resources/assets/css/bootstrap-select.css"
+	rel="stylesheet" />
+<%-- <script src="${path}/resources/assets/js/jquery-2.0.3.min.js"></script> --%>
+ <script src="${path}/resources/assets/js/bootstrap.min.js"></script> 
+
+<script src="${path}/resources/assets/js/bootstrap-select.js"></script>
+
 </head>
 
 
@@ -112,14 +116,14 @@
 											</button>
 											<ul class="dropdown-menu">
 												<li class="divider"></li>
-												<li><a href="#" id="one">icon-desktop</a></li>
+												<li><a href="#" class="one">icon-desktop</a></li>
 												<li class="divider"></li>
-												<li><a href="#" id="two">icon-list</a></li>
+												<li><a href="#" class="two">icon-list</a></li>
 												<li class="divider"></li>
 											</ul>
 										</div>
 										<!-- /btn-group -->
-										<input type="text" class="form-control" id="ic" required
+										<input type="text" class="form-control"  required
 											readonly name="icon">
 									</div>
 									<!-- /input-group -->
@@ -147,7 +151,158 @@
 
 
 						<!--  二级  -->
-						<div class="tab-pane" id="panel-271419"></div>
+                    <div class="tab-pane" id="panel-271419">
+
+                        <form class="form-inline" action="addSecond.action" method="post">
+                            <br>
+                            <div class="control-group">
+
+                                <div class="panel-heading">
+                                    <label class="control-label" for="name"><h3
+                                            class="panel-title">请选择所属的上级菜单</h3></label>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <input type="hidden" value="" name="permission_id" id="permission">
+                                    <select id="firstcategoryid" class="selectpicker" data-live-search="true" title="Please select a lunch ..." required>
+
+                                    </select>
+                                </div> -->
+                                <div class="form-group">
+                                	<select class="form-control" id="firstcategoryid" name="permissionId">
+                       
+                    				</select>
+                    			</div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <div class="panel-heading">
+                                    <label class="control-label" for="name1"><h3
+                                            class="panel-title">请输入二级菜单的名称</h3></label>
+                                </div>
+                                <div class="control-group">
+                                <div class="controls">
+                                    <input type="text" class="form-control" id="name1" name="name"
+                                           required>
+                                </div>
+                                    </div>
+                            </div>
+                            <br />
+                            <div class="control-group">
+                                <div class="panel-heading">
+                                    <label class="control-label" for="name">
+                                        <h3 class="panel-title">设置菜单状态</h3>
+                                    </label><br /> <label class="radio-inline"> <input
+                                        type="radio" value="1" name="status" checked="checked">可用
+                                </label> <label class="radio-inline"> <input type="radio"
+                                                                             value="0" name="status">不可用
+                                </label>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="panel-heading">
+                                    <label class="control-label" for="name">
+                                        <h3 class="panel-title">定义类型</h3>
+                                    </label><br /> <label class="radio-inline"> <input
+                                        type="radio" value="1" name="type" checked="checked">菜单
+                                </label> <label class="radio-inline"> <input type="radio"
+                                                                             value="2" name="type">按钮
+                                </label>
+                                </div>
+
+                            </div>
+
+                            <div class="control-group">
+                                <div class="panel-heading">
+                                    <label class="control-label" for="name">
+                                        <h3 class="panel-title">是否排序</h3>
+                                    </label><br /> <label class="radio-inline"> <input
+                                        type="radio" value="1" name="orders" checked="checked">排序
+                                </label> <label class="radio-inline"> <input type="radio"
+                                                                             value="2" name="orders">不排序
+                                </label>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="panel-heading">
+                                    <label class="control-label" for="name">
+                                        <h3 class="panel-title">是否可查询列表</h3>
+                                    </label><br /> <label class="radio-inline"> <input
+                                        type="radio" value="1" name="islist" checked="checked">是
+                                </label> <label class="radio-inline"> <input type="radio"
+                                                                             value="0" name="islist">否
+                                </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+
+                                <div class="input-group" style="float: left">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default" tabindex="-1">请选择菜单图标</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown" tabindex="-1">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li class="divider"></li>
+                                            <li><a href="#" class="one">icon-desktop</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#" class="two">icon-listp</a></li>
+                                            <li class="divider"></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" class="form-control"  required
+                                           readonly name="icon">
+                                </div>
+                                <!-- /input-group -->
+
+                                <!-- /.col-lg-6 -->
+                                <br>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <div class="panel-heading">
+                                    <label class="control-label" for="name1"><h3
+                                            class="panel-title">请输入URI路径</h3></label>
+                                </div>
+
+                                <div class="controls">
+                                    <input type="text" class="form-control" id="uri" name="uri"
+                                           required>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <div class="panel-heading">
+                                    <label class="control-label" for="name1"><h3
+                                            class="panel-title">请输入类的全路径</h3></label>
+                                </div>
+
+                                <div class="controls">
+                                    <input type="text" class="form-control" id="classpath" name="classpath"
+                                           required>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="control-group">
+                                <br /> <br />
+                                <div class="row clearfix">
+                                    <div class="col-md-12 column">
+                                        <!--<button type="submit" class="btn btn-success btn-lg" >按钮</button>-->
+                                        <button type="submit"
+                                                class="btn btn-success btn-lg btn-block"
+                                                style="text-shadow: black 5px 3px 3px;">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
 					</div>
 				</div>
 
@@ -157,16 +312,32 @@
 
 	<script>
 		$(document).ready(function() {
-			$("#one").click(function() {
+			$(".one").click(function() {
 				var text = $(this).html()
-				$("#ic").val(text)
+				$("[name='icon']").val(text)
 			})
 
-			$("#two").click(function() {
+			$(".two").click(function() {
 				var text = $(this).html()
-				$("#ic").val(text)
+				$("[name='icon']").val(text)
 			})
+			
+			getFirstCategory()
+			
+	        function getFirstCategory (){
+	            $.getJSON("pidlist.action?id=0",function(data){
+	                console.log(data);
+	                var select=$("#firstcategoryid");
+	                $.each(data,function(n,item){
+	                    var option=$("<option></option>");
+	                    option.val(item.permissionId);
+	                    option.text(item.name);
+	                    select.append(option);
+	                });
+	               
 
+	            })
+	        }
 			
 
 		})

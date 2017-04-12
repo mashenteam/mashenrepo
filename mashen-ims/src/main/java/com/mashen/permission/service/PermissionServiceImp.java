@@ -10,6 +10,8 @@ import com.mashen.common.domain.Sequence;
 import com.mashen.common.util.SpringUtil;
 import com.mashen.permission.dao.PermissionVOMapper;
 import com.mashen.permission.domain.PermissionVO;
+import com.mashen.permission.domain.PermissionVOExample;
+import com.mashen.permission.domain.PermissionVOExample.Criteria;
 
 @Service
 public class PermissionServiceImp implements PermissionService {
@@ -75,5 +77,13 @@ public class PermissionServiceImp implements PermissionService {
 	public Integer addThreeButtonPermission(PermissionVO permission) throws Throwable {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<PermissionVO> getPid(String id) throws Throwable {
+		PermissionVOExample example = new PermissionVOExample();
+		Criteria c = example.createCriteria();
+		c.andPidEqualTo(id);
+		return mapper.selectByExample(example);
 	}
 }

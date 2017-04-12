@@ -56,5 +56,13 @@ public interface PermissionService {
 	 */
 	public List<PermissionVO> selectAll() throws Throwable;
 	
+	/**
+	 * 获取所有父级
+	 * @param id
+	 * @return
+	 * @throws Throwable
+	 */
+	public List<PermissionVO> getPid(String id) throws Throwable;
+	
 	public void getIncrement(Sequence seq) throws Throwable;
 }
