@@ -22,7 +22,7 @@ public class CurrentUser {
 	 * @return
 	 */
 	public UserVO getCurrentUser(){
-		return (UserVO)session.getAttribute("user");
+		return (UserVO)session.getAttribute("s_user");
 	}
 	/**
 	 * 获取当前登录用户ID
@@ -64,7 +64,7 @@ public class CurrentUser {
 	 * @return
 	 */
 	public List<String> getRoles(){
-		return (List<String>)session.getAttribute("roles");
+		return (List<String>)session.getAttribute("s_roles");
 	}
 	
 	
@@ -73,7 +73,7 @@ public class CurrentUser {
 	 * @return
 	 */
 	public Set<PermissionVOExt> getFunctionPrivileges(){
-		return (Set<PermissionVOExt>)session.getAttribute("functionPrivileges");
+		return (Set<PermissionVOExt>)session.getAttribute("s_functionPrivileges");
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class CurrentUser {
 	 * @return
 	 */
 	public Set<PermissionVOExt> getButtonPrivileges(){
-		return (Set<PermissionVOExt>)session.getAttribute("buttonPrivileges");
+		return (Set<PermissionVOExt>)session.getAttribute("s_buttonPrivileges");
 	}
 	
 	
@@ -90,7 +90,7 @@ public class CurrentUser {
 	 * @return
 	 */
 	public Set<PermissionVOExt> getFunctionPrivilegesTree(){
-		return (Set<PermissionVOExt>)session.getAttribute("functionPrivilegesTree");
+		return (Set<PermissionVOExt>)session.getAttribute("s_functionPrivilegesTree");
 	}
 	
 	/**
@@ -98,7 +98,7 @@ public class CurrentUser {
 	 * @return
 	 */
 	public String getDataPrivilege(String serviceCode){
-		Map<String,String> dataPrivileges=(Map<String,String>)session.getAttribute("dataPrivileges");
+		Map<String,String> dataPrivileges=(Map<String,String>)session.getAttribute("s_dataPrivileges");
 		return dataPrivileges.get(serviceCode);
 	}
 }

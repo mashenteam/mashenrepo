@@ -53,27 +53,27 @@ public class LoginController {
 		UserVO user=userService.checkLogin(account, pwd);
 		if(user!=null){//登录成功
 			//设置当前用户到session
-			session.setAttribute("user",user);
+			session.setAttribute("s_user",user);
 			
 			//设置当前用户的所有角色到session
 			List<String> roles=privilegeService.listUserRoles(user.getUserId());
-			session.setAttribute("roles",roles);
+			session.setAttribute("s_roles",roles);
 			
 			//设置当前用户的功能权限到session
 			Set<PermissionVOExt> functionPrivileges=privilegeService.listUserMenuPermissions(roles);
-			session.setAttribute("functionPrivileges", functionPrivileges);
+			session.setAttribute("s_functionPrivileges", functionPrivileges);
 			
 			//功能权限树
 			Set<PermissionVOExt> functionPrivilegesTree=privilegeService.listUserMenuTreePermissions(functionPrivileges);
-			session.setAttribute("functionPrivilegesTree", functionPrivilegesTree);
+			session.setAttribute("s_functionPrivilegesTree", functionPrivilegesTree);
 			
 			//按钮权限
 			Set<PermissionVOExt> buttonPrivileges=privilegeService.listUserButtonPermissions(roles);
-			session.setAttribute("buttonPrivileges", buttonPrivileges);
+			session.setAttribute("s_buttonPrivileges", buttonPrivileges);
 			
 			//设置当前用户的数据权限到session
 			Map<String,String> dataPrivileges=dataruleService.listDataRule(roles);
-		    session.setAttribute("dataPrivileges", dataPrivileges);
+		    session.setAttribute("s_dataPrivileges", dataPrivileges);
 		    
 		    //跳转到后台主页
 		    return "redirect:main.action";
