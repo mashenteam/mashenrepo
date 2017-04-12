@@ -1,6 +1,7 @@
 package com.mashen.user.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,13 +79,20 @@ public class UserManageController {
 	 */
 	@RequestMapping("/doEdit")
 	@FunctionPrivilege
-	public ModelAndView doAdd(UserVO user) throws Throwable{
+	public ModelAndView doAdd(UserVO user,String[] roleId) throws Throwable{
 		ModelAndView model=new ModelAndView("user/list");
-		
+		System.out.println("user:"+user);
 		if(user.getUserId()!=null&&service.getUserById(user.getUserId())!=null){//修改
 			service.updateUser(user);
 		}else{//新增
-			service.addUser(user);
+			List<RoleVO> roles = new ArrayList<>();
+			RoleVO roleVO = null;
+			for(String id : roleId){
+				roleVO = new RoleVO();
+				roleVO.setRoleId(id);
+				roles.add(roleVO);
+			}
+			service.addRoles(roles, user);
 		}
 		return model;
 	}

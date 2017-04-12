@@ -1,10 +1,12 @@
 package com.mashen.user.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.mashen.common.domain.PageVO;
 import com.mashen.datatables.domain.DataTablesRequest;
 import com.mashen.datatables.domain.DataTablesResponse;
+import com.mashen.role.domain.RoleVO;
 import com.mashen.user.domain.UserVO;
 
 public interface UserService {
@@ -33,4 +35,10 @@ public interface UserService {
 	 * @return
 	 */
 	public PageVO<UserVO> list(PageVO<UserVO> pagevo,Map<String,Object> request) throws Throwable;
+	
+	/**
+	 * 给用户添加角色
+	 * @param roles
+	 */
+	public void addRoles(List<RoleVO> roles, UserVO user) throws Throwable;
 }

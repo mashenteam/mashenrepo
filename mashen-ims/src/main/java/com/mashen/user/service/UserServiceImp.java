@@ -1,10 +1,15 @@
 package com.mashen.user.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.mashen.common.dao.CommonMapper;
 import com.mashen.common.domain.PageVO;
+import com.mashen.common.domain.Sequence;
 import com.mashen.common.util.IDUtil;
 import com.mashen.common.util.MD5Util;
 import com.mashen.common.util.SearchConditionUtils;
@@ -13,6 +18,8 @@ import com.mashen.datatables.domain.DataTablesResponse;
 import com.mashen.privilege.aop.annotation.DataPrivilege;
 import com.mashen.privilege.aop.annotation.SearchCondition;
 import com.mashen.privilege.aop.annotation.SearchConditionType;
+import com.mashen.role.domain.RoleVO;
+import com.mashen.user.dao.UserVOExtMapper;
 import com.mashen.user.dao.UserVOMapper;
 import com.mashen.user.domain.UserVO;
 import com.mashen.user.domain.UserVOExample;
@@ -21,7 +28,10 @@ import com.mashen.user.domain.UserVOExample;
 public class UserServiceImp implements UserService {
 	@Autowired
 	private UserVOMapper mapper;
-
+	@Autowired
+	private CommonMapper commonMapper;
+	@Autowired
+	private UserVOExtMapper extMapper;
 	@Override
 	@DataPrivilege("user")
 	public DataTablesResponse<UserVO> list(
@@ -98,5 +108,19 @@ public class UserServiceImp implements UserService {
 		return null;
 		
 	}
-
+	
+	@Override
+	public void addRoles(List<RoleVO> roles, UserVO user) throws Throwable {
+		this.addUser(user);
+		Map<String,Object> condition = new HashMap<>();
+		Sequence sequence = new Sequence();
+		System.out.println("*******roles:"+roles);
+		for(RoleVO role : roles){
+			commonMapper.getSequence(sequence);
+			condition.put("user_role_id", sequence.getId());
+			condition.put("userId", user.getUserId());
+			condition.put("roleId", role.getRoleId());
+			this.extMapper.addRoles(condition);
+		}
+	}
 }

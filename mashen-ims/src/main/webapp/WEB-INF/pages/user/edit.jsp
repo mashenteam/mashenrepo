@@ -33,14 +33,13 @@
 				</div>
 				<div class="form-group" >
 					<label for="dept" >所属部门</label>
-					<select name="roleId" id="dept"  class="form-control">
+					<select name="departmentId" id="dept"  class="form-control" name="departmentId">
 						<option>--请选择--</option>
 					</select> 
 				</div>
 				<div class="form-group">
 					<label for="role">岗位</label>
-					<select name="roleId" id="role" class="form-control">
-						<option>--请选择--</option>
+					<select name="roleId" id="role" class="form-control" name="roleId" multiple="multiple">
 					</select>
 				</div>
 				<div class="text-center">
@@ -66,7 +65,7 @@
 		$.post("${path}/user/getRole.action",function(data){
 			$.each(data,function(index,item){
 				var option = $("<option></option>");
-				option.attr("value",item.departmentId).text(item.name);
+				option.attr("value",item.roleId).text(item.name);
 				$("#role").append(option);
 			});
 		},"json");
