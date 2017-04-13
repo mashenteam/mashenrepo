@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mashen.customer.dao.CustomerVOMapper" >
+  <resultMap id="BaseResultMap" type="com.mashen.customer.domain.CustomerVO" >
+    <id column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="graduationtime" property="graduationtime" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="isopen" property="isopen" jdbcType="VARCHAR" />
+    <result column="baseinfo" property="baseinfo" jdbcType="VARCHAR" />
+    <result column="economicinfo" property="economicinfo" jdbcType="VARCHAR" />
+    <result column="loaninf" property="loaninf" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="lastmodifytime" property="lastmodifytime" jdbcType="TIMESTAMP" />
+    <result column="creator_department_id" property="creatorDepartmentId" jdbcType="VARCHAR" />
+    <result column="creator_user_id" property="creatorUserId" jdbcType="VARCHAR" />
+    <result column="first_creator_user_id" property="firstCreatorUserId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    customer_id, name, sex, phone, profession, degree, graduationtime, status, source, 
+    isopen, baseinfo, economicinfo, loaninf, ctime, lastmodifytime, creator_department_id, 
+    creator_user_id, first_creator_user_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mashen.customer.domain.CustomerVOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from crm_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null" >
+      <if test="offset != null" >
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null" >
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_customer
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from crm_customer
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mashen.customer.domain.CustomerVOExample" >
+    delete from crm_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mashen.customer.domain.CustomerVO" useGeneratedKeys="true" keyProperty="id" >
+    insert into crm_customer (customer_id, name, sex, 
+      phone, profession, degree, 
+      graduationtime, status, source, 
+      isopen, baseinfo, economicinfo, 
+      loaninf, ctime, lastmodifytime, 
+      creator_department_id, creator_user_id, first_creator_user_id
+      )
+    values (#{customerId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{phone,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, 
+      #{graduationtime,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{isopen,jdbcType=VARCHAR}, #{baseinfo,jdbcType=VARCHAR}, #{economicinfo,jdbcType=VARCHAR}, 
+      #{loaninf,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, #{lastmodifytime,jdbcType=TIMESTAMP}, 
+      #{creatorDepartmentId,jdbcType=VARCHAR}, #{creatorUserId,jdbcType=VARCHAR}, #{firstCreatorUserId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mashen.customer.domain.CustomerVO" useGeneratedKeys="true" keyProperty="id" >
+    insert into crm_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="degree != null" >
+        degree,
+      </if>
+      <if test="graduationtime != null" >
+        graduationtime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="isopen != null" >
+        isopen,
+      </if>
+      <if test="baseinfo != null" >
+        baseinfo,
+      </if>
+      <if test="economicinfo != null" >
+        economicinfo,
+      </if>
+      <if test="loaninf != null" >
+        loaninf,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="lastmodifytime != null" >
+        lastmodifytime,
+      </if>
+      <if test="creatorDepartmentId != null" >
+        creator_department_id,
+      </if>
+      <if test="creatorUserId != null" >
+        creator_user_id,
+      </if>
+      <if test="firstCreatorUserId != null" >
+        first_creator_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="graduationtime != null" >
+        #{graduationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="isopen != null" >
+        #{isopen,jdbcType=VARCHAR},
+      </if>
+      <if test="baseinfo != null" >
+        #{baseinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="economicinfo != null" >
+        #{economicinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="loaninf != null" >
+        #{loaninf,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifytime != null" >
+        #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorDepartmentId != null" >
+        #{creatorDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorUserId != null" >
+        #{creatorUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCreatorUserId != null" >
+        #{firstCreatorUserId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mashen.customer.domain.CustomerVOExample" resultType="java.lang.Integer" >
+    select count(*) from crm_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update crm_customer
+    <set >
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null" >
+        profession = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null" >
+        degree = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduationtime != null" >
+        graduationtime = #{record.graduationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isopen != null" >
+        isopen = #{record.isopen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baseinfo != null" >
+        baseinfo = #{record.baseinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.economicinfo != null" >
+        economicinfo = #{record.economicinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loaninf != null" >
+        loaninf = #{record.loaninf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctime != null" >
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastmodifytime != null" >
+        lastmodifytime = #{record.lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatorDepartmentId != null" >
+        creator_department_id = #{record.creatorDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorUserId != null" >
+        creator_user_id = #{record.creatorUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstCreatorUserId != null" >
+        first_creator_user_id = #{record.firstCreatorUserId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update crm_customer
+    set customer_id = #{record.customerId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      profession = #{record.profession,jdbcType=VARCHAR},
+      degree = #{record.degree,jdbcType=VARCHAR},
+      graduationtime = #{record.graduationtime,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      isopen = #{record.isopen,jdbcType=VARCHAR},
+      baseinfo = #{record.baseinfo,jdbcType=VARCHAR},
+      economicinfo = #{record.economicinfo,jdbcType=VARCHAR},
+      loaninf = #{record.loaninf,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      lastmodifytime = #{record.lastmodifytime,jdbcType=TIMESTAMP},
+      creator_department_id = #{record.creatorDepartmentId,jdbcType=VARCHAR},
+      creator_user_id = #{record.creatorUserId,jdbcType=VARCHAR},
+      first_creator_user_id = #{record.firstCreatorUserId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mashen.customer.domain.CustomerVO" >
+    update crm_customer
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="graduationtime != null" >
+        graduationtime = #{graduationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="isopen != null" >
+        isopen = #{isopen,jdbcType=VARCHAR},
+      </if>
+      <if test="baseinfo != null" >
+        baseinfo = #{baseinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="economicinfo != null" >
+        economicinfo = #{economicinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="loaninf != null" >
+        loaninf = #{loaninf,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifytime != null" >
+        lastmodifytime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorDepartmentId != null" >
+        creator_department_id = #{creatorDepartmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorUserId != null" >
+        creator_user_id = #{creatorUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCreatorUserId != null" >
+        first_creator_user_id = #{firstCreatorUserId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mashen.customer.domain.CustomerVO" >
+    update crm_customer
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      graduationtime = #{graduationtime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      isopen = #{isopen,jdbcType=VARCHAR},
+      baseinfo = #{baseinfo,jdbcType=VARCHAR},
+      economicinfo = #{economicinfo,jdbcType=VARCHAR},
+      loaninf = #{loaninf,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      lastmodifytime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      creator_department_id = #{creatorDepartmentId,jdbcType=VARCHAR},
+      creator_user_id = #{creatorUserId,jdbcType=VARCHAR},
+      first_creator_user_id = #{firstCreatorUserId,jdbcType=VARCHAR}
+    where customer_id = #{customerId,jdbcType=INTEGER}
+  </update>
+</mapper>

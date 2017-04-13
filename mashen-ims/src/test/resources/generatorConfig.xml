@@ -33,21 +33,21 @@
 		</jdbcConnection>
 
 		<!-- model的配置 -->
-		<javaModelGenerator targetPackage="com.mashen.datarule.domain"
+		<javaModelGenerator targetPackage="com.mashen.customer.domain"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!-- mybatis的xml的配置 --> 	
-		<sqlMapGenerator targetPackage="com.mashen.datarule.dao"
+		<sqlMapGenerator targetPackage="com.mashen.customer.dao"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- mapper的配置 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.mashen.datarule.dao" targetProject="src/main/java">
+			targetPackage="com.mashen.customer.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		

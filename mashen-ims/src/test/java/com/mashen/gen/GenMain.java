@@ -5,7 +5,7 @@ public class GenMain {
 		String configFile = "/generatorConfig.xml";
 		try {
 
-			 String[] tableNames = new String[] { "uc_datarule"};
+			 String[] tableNames = new String[] { "crm_customer"};
 			GenMybatisFiles.gen(configFile, tableNames);
 		} catch (Exception e) {
 			e.printStackTrace();
