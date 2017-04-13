@@ -31,7 +31,7 @@ public class RoleManageController {
 	}
 	
 	@RequestMapping("/rest/doSearch")
-	@FunctionPrivilege
+//	@FunctionPrivilege
 	public @ResponseBody DataTablesResponse<RoleVO> pageSearch(
 			@RequestBody DataTablesRequest request) throws Throwable{
 		return service.list(request);
@@ -44,9 +44,13 @@ public class RoleManageController {
 	 */
 	@RequestMapping("/edit")
 	public ModelAndView add(String id) throws Throwable{
+		System.out.println(1212);
+		System.out.println(id);
 		ModelAndView model=new ModelAndView("role/edit");
 		if(id!=null){//修改
+			System.out.println(service.getRoleById(id));
 			model.addObject("role",service.getRoleById(id));
+			System.out.println(service.getRoleById(id));
 		}
 		return model;
 	}
@@ -58,7 +62,7 @@ public class RoleManageController {
 	 * @throws Throwable 
 	 */
 	@RequestMapping("/doEdit")
-	@FunctionPrivilege
+//	@FunctionPrivilege
 	public ModelAndView doAdd(RoleVO role) throws Throwable{
 		ModelAndView model=new ModelAndView("role/list");
 		

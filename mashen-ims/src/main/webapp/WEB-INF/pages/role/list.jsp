@@ -62,7 +62,7 @@
 							    "dom": 'tiprl',//自定义显示项
 								//跟数组下标一样，第一列从0开始，这里表格初始化时，
 								//第四列默认降序
-								"order" : [ [ 5, "desc" ] ],
+								"order" : [ [ 4, "desc" ] ],
 								"ajax" : {
 									"url" : "${path}/role/rest/doSearch.action",
 									"type" : "POST",
@@ -91,8 +91,6 @@
 								"columns" : [ {
 									"data" : "roleId"
 								}, {
-									"data" : "roleId"
-								}, {
 									"data" : "name"
 								}, {
 									"data" : "description"
@@ -104,10 +102,10 @@
 								}],
 								"columnDefs" : [
 										{
-											"targets" : [ 0, 4 ],
+											"targets" : [ 0, 3 ],
 											"orderable" : false,
 											"visible" : true,
-											"searchable" : true
+											"searchable" : false
 										},
 										{
 											"render" : function(data, type, row) {
@@ -121,7 +119,7 @@
 												return '<a href="${path }/role/edit.action?id='+data+'" class="tooltip-success" data-rel="tooltip" title="Edit"><span class="green"><i class="icon-edit bigger-120"></i></a>&nbsp;&nbsp;'
 												+'<a href="javascript:void(0)" onclick="del(\''+data+'\')" class="tooltip-error" data-rel="tooltip" title="Delete"><span class="red"><i class="icon-trash bigger-120"></i></a>';
 											},
-											"targets" : 4
+											"targets" : 3
 										} ],
 
 								"language" : {

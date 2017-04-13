@@ -15,14 +15,21 @@
 	   <div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form role="form" action="${path }/role/doEdit.action" method="post">
+			
+			<input type="hidden" name="roleId" value="${role.roleId }">
+			<!-- role修改是通过id进行修改，如果没有则默认是添加 -->
+			
 				<div class="form-group">
 					<label for="name">角色名称</label> <input type="text" required="required"
 						class="form-control" name="name" value="${role.name }" placeholder="请输入名称">
 				</div>
 				<div class="form-group">
-					<label for="name">角色描述</label><textarea rows="12" cols="100"></textarea>
-					<%-- <input type="" required="required"
-						class="form-control" name="phone" value="${user.phone }" placeholder="请输入手机号"> --%>
+					
+				<!-- 	<label for="name">角色描述</label><textarea rows="12" cols="100"></textarea> -->
+					
+					<input type="" required="required"
+						class="form-control" name="description" value="${role.description }" placeholder="请输入描述">
+				
 				<div class="text-center">
 				<button type="submit" class="btn btn-primary">保存</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;

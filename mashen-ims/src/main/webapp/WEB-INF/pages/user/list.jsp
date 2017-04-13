@@ -122,16 +122,11 @@
 								}, {
 									"data" : "account"
 								}, {
-									"data" : "ctime",
+									"data" : "ctime",//默认排序字段
 									"visible" : false
 								}],
 								"columnDefs" : [
-										{
-											"targets" : [ 0, 4 ],
-											"orderable" : false,
-											"visible" : true,
-											"searchable" : true
-										},
+										
 										{
 											"render" : function(data, type, row) {
 												return '<div class="checkbox"><label><input type="checkbox" value="'+data+'"></label></div>';

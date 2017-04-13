@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mashen.common.domain.PageVO;
+import com.mashen.common.util.IDUtil;
 import com.mashen.common.util.SearchConditionUtils;
 import com.mashen.datatables.domain.DataTablesRequest;
 import com.mashen.datatables.domain.DataTablesResponse;
@@ -23,6 +24,8 @@ public class RoleServiceImp implements RoleService {
 
 	@Override
 	public void addRole(RoleVO role) throws Throwable {
+		role.setRoleId(IDUtil.uuid());
+		role.setOrders(IDUtil.sequence());
 		mapper.insertSelective(role);
 	}
 
@@ -56,7 +59,6 @@ public class RoleServiceImp implements RoleService {
 		RoleVOExample example=new RoleVOExample();
 		DataTablesResponse<RoleVO> response=new DataTablesResponse<RoleVO>();
 		SearchConditionUtils.wrapperAndCondition(example, request);
-		
 		response.setDraw(request.getDraw());
 		response.setRecordsTotal(mapper.countByExample(example));
 		response.setData(mapper.selectByExample(example));
