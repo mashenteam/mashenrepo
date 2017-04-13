@@ -61,8 +61,9 @@
 				$("#dept").append(option);
 			});
 		},"json");
-		
+		var node;
 		$.post("${path}/user/getRole.action",function(data){
+			node = data;
 			$.each(data,function(index,item){
 				var option = $("<option></option>");
 				option.attr("value",item.roleId).text(item.name);
